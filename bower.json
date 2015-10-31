@@ -1,0 +1,22 @@
+{
+  "name": "Budgeteer",
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "jquery": "~2.1.4",
+    "satellizer": "~0.12.5",
+    "lodash": "~3.10.1",
+    "font-awesome": "~4.4.0"
+  }
+}
