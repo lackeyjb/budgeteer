@@ -197,7 +197,7 @@ gulp.task('serve-build', ['build'], function() {
   var msg = {
     title: 'gulp build',
     subtitle: 'Deployed to the build folder',
-    message: "Running 'gulp serve-build'"
+    message: 'Running \'gulp serve-build\''
   };
   notify(msg);
 });
@@ -298,7 +298,7 @@ function startBrowserSync(isDev) {
 
 function clean(path, done) {
   log('Cleaning: ' + $.util.colors.blue(path));
-  del(path, done);
+  del(path).then(done());
 }
 
 function log(msg) {
