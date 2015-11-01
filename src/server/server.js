@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const express = require('express');
 const errorhandler = require('errorhandler');
@@ -20,9 +22,9 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use('/api', routes);
+//app.use('/api', routes);
 
-if (app.get('env') === 'development')) {
+if (app.get('env') === 'development') {
   app.use(errorhandler());
   app.use(express.static(path.join(__dirname, '../client')));
   app.use(express.static(path.join(__dirname, '../../')));
@@ -32,7 +34,7 @@ if (app.get('env') === 'development')) {
   });
 }
 
-if (app.get('env') === 'production')) {
+if (app.get('env') === 'production') {
   app.use(express.static(path.join(__dirname, '../../build')));
   app.use((req, res) => {
     res.sendFile(path.join(__dirname, '../../build', 'index.html'));
@@ -50,8 +52,9 @@ models
   .sync()
   .then(() => {
     app.listen(port);
-    chalk.bgGreen(`Server started on port: ${port}`);
+    console.log(chalk.bgBlue(`==== Server started on port: ${port} ====`));
+    console.log(chalk.bgBlue(`======= NODE_ENV: ${process.env.NODE_ENV} ========`));
   })
-  .catch(() => {
-    chalk.bgRed('App failed on sequelize error');
+  .catch((err) => {
+    console.error(chalk.bgRed(`App failed on: ${err}`));
   });
