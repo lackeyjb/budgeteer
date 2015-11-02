@@ -52,7 +52,45 @@ module.exports = {
     .catch((err) => {
       console.error(chalk.red(err));
     });
+  },
+
+  index: function (req, res) {
+    User.all()
+    .then((users) => {
+      return res.status(200).json(users);
+    })
+    .catch((err) => {
+      return res.status(400).json(err);
+    });
+  },
+
+  show: function (req, res) {
+    User.findById(req.params.userId)
+    .then((user) => {
+      return res.status(200).json(user);
+    })
+    .catch((err) => {
+      return res.status(400).json(err);
+    });
+  },
+
+  update: function (req, res) {
+    User.update({
+      email: req.body.email,
+      username: req.body.username
+    }, {
+      where: {
+        id: req.params.userId
+      }
+    })
+    .then((user) => {
+      return res.status(200).json(user);
+    })
+    .catch((err) => {
+      return res.status(400).json(err);
+    });
   }
+
 };
 
 ///////////////////////
