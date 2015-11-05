@@ -20,7 +20,7 @@ module.exports = {
       });
     })
     .catch((err) => {
-      console.log(chalk.red(err));
+      console.error(err);
     });
   },
 
