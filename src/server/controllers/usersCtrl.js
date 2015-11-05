@@ -1,7 +1,6 @@
 'use strict';
 
 const jwt = require('jwt-simple');
-const chalk = require('chalk');
 const moment = require('moment');
 const models = require('../models');
 const User = models.User;
@@ -9,7 +8,7 @@ const tokenSecret = process.env.TOKEN_SECRET;
 
 module.exports = {
 
-  signup: function (req, res) {
+  signup(req, res) {
     User.create({
       email: req.body.email,
       password: req.body.password,
@@ -25,7 +24,7 @@ module.exports = {
     });
   },
 
-  login: function (req, res) {
+  login(req, res) {
     User.find({
       where: {
         email: req.body.email
@@ -50,11 +49,11 @@ module.exports = {
       });
     })
     .catch((err) => {
-      console.error(chalk.red(err));
+      console.error(err);
     });
   },
 
-  index: function (req, res) {
+  index(req, res) {
     User.all()
     .then((users) => {
       return res.status(200).json(users);
@@ -64,7 +63,7 @@ module.exports = {
     });
   },
 
-  show: function (req, res) {
+  show(req, res) {
     User.findById(req.params.id)
     .then((user) => {
       return res.status(200).json(user);
@@ -74,7 +73,7 @@ module.exports = {
     });
   },
 
-  update: function (req, res) {
+  update(req, res) {
     User.update({
       email: req.body.email,
       username: req.body.username
