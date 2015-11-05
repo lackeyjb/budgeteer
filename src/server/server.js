@@ -22,7 +22,7 @@ app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-//app.use('/api', routes);
+app.use('/api', routes);
 
 if (app.get('env') === 'development') {
   app.use(errorhandler());
@@ -42,7 +42,7 @@ if (app.get('env') === 'production') {
 }
 
 app.use((req, res, next) => {
-  let err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
