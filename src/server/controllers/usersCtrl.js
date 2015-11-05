@@ -65,7 +65,7 @@ module.exports = {
   },
 
   show: function (req, res) {
-    User.findById(req.params.userId)
+    User.findById(req.params.id)
     .then((user) => {
       return res.status(200).json(user);
     })
@@ -80,7 +80,7 @@ module.exports = {
       username: req.body.username
     }, {
       where: {
-        id: req.params.userId
+        id: req.params.id
       }
     })
     .then((user) => {
