@@ -3,22 +3,28 @@
 const bcrypt = require('bcrypt-nodejs');
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
+  const User = sequelize.define('user', {
     email: {
       type: DataTypes.STRING,
       unique: true,
+      required: true,
       validate: {
         isEmail: true
       }
     },
     password: {
       type: DataTypes.STRING,
+      required: true,
       validate: {
         len: [4, 20]
       }
     },
     username: {
       type: DataTypes.STRING
+    },
+    budgetAdmin: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
   }, {
     indexes: [
@@ -44,9 +50,6 @@ module.exports = (sequelize, DataTypes) => {
             callback(null, isMatch);
           }
         });
-      },
-      associate(models) {
-        // example: User.hasMany(models.Task)
       }
     }
   });
