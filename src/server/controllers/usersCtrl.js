@@ -3,6 +3,7 @@
 const jwt = require('jwt-simple');
 const moment = require('moment');
 const models = require('../models');
+const utils = require('../lib/utils');
 const User = models.User;
 const tokenSecret = process.env.TOKEN_SECRET;
 
@@ -16,7 +17,7 @@ module.exports = {
     })
     .then((user) => {
       res.status(201).json({
-        token: createJWT(user)
+        token: utils.createJWT(user)
       });
     })
     .catch((err) => {
@@ -39,7 +40,7 @@ module.exports = {
         }
         if (isMatch) {
           return res.status(200).json({
-            token: createJWT(user)
+            token: utils.createJWT(user)
           });
         } else {
           return res.status(400).json({
@@ -91,15 +92,3 @@ module.exports = {
   }
 
 };
-
-///////////////////////
-///////////////////////
-
-function createJWT(user) {
-  const payload = {
-    sub: User.id,
-    iat: moment().unix(),
-    exp: moment().add(14, 'days').unix()
-  };
-  return jwt.encode(payload, tokenSecret);
-}
